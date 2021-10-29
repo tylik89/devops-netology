@@ -1,5 +1,7 @@
 # Домашнее задание к занятию «2.2. Основы Git» - Алексей Тылик 
 
+Cсылки на все три репозитория в [github](https://github.com/tylik89/devops-netology), [gitlab](https://gitlab.com/tylik89/devops-netology) , [bitbucket](https://bitbucket.org/tylik89/devops-netology/src)
+
 ## Задание №1 – Знакомимся с gitlab и bitbucket 
 
 1. Создадим аккаунт в gitlab: @tylik89
