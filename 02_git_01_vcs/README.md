@@ -8,3 +8,4 @@
 
 Игнорировать файлы переопределения `override.tf override.tf.json *_override.tf *_override.tf.json`,
 файлы конфигурации командной строки `.terraformrc terraform.rc`
+new line
