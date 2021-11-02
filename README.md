@@ -11,4 +11,6 @@
 
 2.1. [x] [Системы контроля версий](02_git_01_vcs/README.md)
 
-2.2. [ ] [Основы Git](02_git_02_base/README.md)
+2.2. [x] [Основы Git](02_git_02_base/README.md)
+
+2.3. [ ] [Ветвления в Git](02_git_03_branching/README.md)
