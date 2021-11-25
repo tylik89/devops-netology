@@ -13,4 +13,10 @@
 
 2.2. [x] [Основы Git](02_git_02_base/README.md)
 
-2.3. [ ] [Ветвления в Git](02_git_03_branching/README.md)
+2.3. [x] [Ветвления в Git](02_git_03_branching/README.md)
+
+2.4. [x] [Инструменты Git](02-git-04-tools/README.md)
+
+## Модуль 3. Основы системного администрировани
+
+3.1. [ ] [Работа в терминале (лекция 1)](03-sysadmin-01-terminal/README.md)
