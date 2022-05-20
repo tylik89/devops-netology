@@ -138,10 +138,75 @@ vagrant@vagrant:~$ sysctl -n fs.nr_open
 ---
 6. Запустите любой долгоживущий процесс (не `ls`, который отработает мгновенно, а, например, `sleep 1h`) в отдельном неймспейсе процессов; покажите, что ваш процесс работает под PID 1 через `nsenter`. Для простоты работайте в данном задании под root (`sudo -i`). Под обычным пользователем требуются дополнительные опции (`--map-root-user`) и т.д.
 
+/dev/pts/0
+```commandline
+root@vagrant:~# sudo unshare -f --pid --mount-proc /bin/bash
+root@vagrant:~# ps aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.2  0.4   7236  4128 pts/0    S    05:41   0:00 /bin/bash
+root           9  0.0  0.3   8892  3380 pts/0    R+   05:42   0:00 ps aux
+root@vagrant:~# sleep 1h
+ ```
+/dev/pts/1
+```commandline
+root@vagrant:~# ps aux 
+...
+root        1912  0.0  0.0   5476   592 pts/0    S+   05:55   0:00 sleep 1h
+root@vagrant:~# nsenter --target 1912 --pid --mount
+root@vagrant:/# ps aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.4   7236  4128 pts/0    S    05:41   0:00 /bin/bash
+root          17  0.0  0.0   5476   592 pts/0    S+   05:55   0:00 sleep 1h
+root          18  1.6  0.4   7236  4028 pts/1    S    06:05   0:00 -bash
+root          29  0.0  0.3   8892  3376 pts/1    R+   06:05   0:00 ps aux
+root@vagrant:/# 
+
+ ```
 ---
 7. Найдите информацию о том, что такое `:(){ :|:& };:`. Запустите эту команду в своей виртуальной машине Vagrant с Ubuntu 20.04 (**это важно, поведение в других ОС не проверялось**). Некоторое время все будет "плохо", после чего (минуты) – ОС должна стабилизироваться. Вызов `dmesg` расскажет, какой механизм помог автоматической стабилизации. Как настроен этот механизм по-умолчанию, и как изменить число процессов, которое можно создать в сессии?
 
  
+Это концепция `Fork Bomb` —  маленькая программа, которая порождает себя n-раз, отбросив цепную реакцию (рекурсия) и тем самым быстро исчерпав ресурсы системы.
+
+Где:
+`:()` — Определение функции.
+`{ ` — Открытие функции.
+`:|: `— Далее, загружает копию функции «:» в память тем самым, будет вызывать само себя с использованием техники программирования ( так называемая рекурсия) и передает результат на другой вызов функции.
+`‘:’`— Худшая часть — функция, вызываемая два раза, чтобы «бомбить» вашу систему.
+`& `— Помещает вызов функции в фоновом режиме, чтобы fork (дочерний процесс) не мог «умереть» вообще, тем самым это начнет есть системные ресурсы.
+`} `— Закрытие функции.
+`;` — Завершите определение функции. Т.е является разделителем команд, (такой как и &&).
+`:` — Запускает функцию которая порождает fork bomb().
+
+сработал механизм сгрупп - это способ сократить ресурсы внутри конкретной группы (контроль групповых процессов)
+```
+vagrant@vagrant:~$ dmesg -T
+...
+[Fri May 20 06:29:04 2022] cgroup: fork rejected by pids controller in /user.slice/user-1000.slice/session-4.scope
+```
+
+ Cработал механизм групп - это способ сократить ресурсы внутри конкретной группы(max user processes )
+```commandline
+vagrant@vagrant:~$ ulimit -a
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 3571
+max locked memory       (kbytes, -l) 65536
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 1024
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) 8192
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 3571
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+```
+изминить можно здесь: `/etc/security/limits.conf`
+
 ---
 
 
