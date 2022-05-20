@@ -30,6 +30,8 @@ $ sudo apt install virtualbox-6.1
 
 Чтобы установить  Vagrant на  Ubuntu , выполниним следующие действия:
 ```bash
+$ sudo apt  install curl
+
 $ curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
 
 $ sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
