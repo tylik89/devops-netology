@@ -27,4 +27,4 @@
 
 3.4. [x] [Операционные системы (лекция 2)](03-sysadmin-04-os/README.md)
 
-3.5. [ ] [Файловые системы](3-sysadmin-05-fs/README.md)
+3.5. [x] [Файловые системы](3-sysadmin-05-fs/README.md)
