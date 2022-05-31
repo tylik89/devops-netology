@@ -32,3 +32,15 @@
 3.6. [x] [Компьютерные сети (лекция 1)](03-sysadmin-06-net/README.md)
 
 3.7. [х] [Компьютерные сети (лекция 2)](03-sysadmin-07-net/README.md)
+
+3.8. [х] [Компьютерные сети (лекция 3)](03-sysadmin-08-net/README.md)
+
+3.9. [ ] [Элементы безопасности информационных систем](03-sysadmin-09-security/README.md)
+
+## Модуль 4. Скриптовые языки и языки разметки: Python, Bash, YAML, JSON
+
+4.1. [ ] [Командная оболочка Bash: практические навыки](04-script-01-bash/README.md)
+
+4.2. [ ] [Использование Python для решения типовых DevOps задач](04-script-02-py/README.md)
+
+4.3. [ ] [Языки разметки JSON и YAML](04-script-03-yaml/README.md)
