@@ -80,7 +80,7 @@ for result in result_os.split('\n'):
 a1@a1:~/web/devops-netology/04-script-02-py$ python3 script_01.py 
 ~/web/devops-netology/01_intro_01/README.md
 ~/web/devops-netology/03-sysadmin-09-security/README.md
-~/web/devops-netology/04-script-02-py/READMI.md
+~/web/devops-netology/04-script-02-py/README.md
 ~/web/devops-netology/README.md
 a1@a1:~/web/devops-netology/04-script-02-py$ python3 script_01.py 6
 6-это не директория
